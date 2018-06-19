@@ -52,7 +52,7 @@ public class CriadorDeProdutos {
 				cursoDeViolao.setLoja(musicalAlegre);
 				cursoDeViolao.setPreco(49.0);
 				cursoDeViolao.setDescricao("Estude com os melhores professores e aprenda no seu ritmo, sem sair de casa.");
-//				cursoDeViolao.adicionarCategorias(tecnologia, musica);
+				cursoDeViolao.adicionarCategorias(tecnologia, musica);
 				cursoDeViolao.setLinkDaFoto("https://pbs.twimg.com/profile_images/378800000825434860/12136ee913ed4f44860914d44650144e.png");
 				
 				em.persist(cursoDeViolao);
