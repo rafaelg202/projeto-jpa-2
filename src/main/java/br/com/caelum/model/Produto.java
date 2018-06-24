@@ -13,12 +13,16 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Produto {
 
 	@Id
@@ -28,18 +32,29 @@ public class Produto {
 	private String nome;
 	@NotEmpty
 	private String linkDaFoto;
-	
+
 	@NotEmpty
 	@Column(columnDefinition="TEXT")
 	private String descricao;
 	
 	@Min(20)
 	private double preco;
-	
+	@Version
+	private Integer versao;
+
 	@ManyToMany
 	@JoinTable(name="CATEGORIA_PRODUTO")
+	@Cache(usage=CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	private List<Categoria> categorias = new ArrayList<>();
 	
+	public Integer getVersao() {
+		return versao;
+	}
+
+	public void setVersao(Integer versao) {
+		this.versao = versao;
+	}
+
 	public List<Categoria> getCategorias() {
 		return categorias;
 	}
